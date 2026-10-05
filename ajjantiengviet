@@ -1,0 +1,288 @@
+-- ====================================================================
+-- AJJAN SCRIPT LOADER (CHỌN NGÔN NGỮ / LANGUAGE SELECTOR)
+-- ====================================================================
+
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Tạo UI Chọn Ngôn Ngữ
+local LangGui = Instance.new("ScreenGui")
+LangGui.Name = "BigFrootLangSelector"
+LangGui.Parent = CoreGui:FindFirstChild("RobloxGui") or (LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui")) or CoreGui
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 320, 0, 170)
+MainFrame.Position = UDim2.new(0.5, -160, 0.5, -85)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = LangGui
+
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 10)
+Corner.Parent = MainFrame
+
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(255, 120, 30)
+Stroke.Thickness = 2
+Stroke.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 45)
+Title.Position = UDim2.new(0, 0, 0, 10)
+Title.BackgroundTransparency = 1
+Title.Text = "BIGFROOT SCRIPT\nChọn ngôn ngữ / Select Language"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 15
+Title.Font = Enum.Font.SourceSansBold
+Title.Parent = MainFrame
+
+local BtnVN = Instance.new("TextButton")
+BtnVN.Size = UDim2.new(0, 130, 0, 45)
+BtnVN.Position = UDim2.new(0, 20, 0, 95)
+BtnVN.BackgroundColor3 = Color3.fromRGB(230, 50, 50)
+BtnVN.Text = "Tiếng Việt 🇻🇳"
+BtnVN.TextColor3 = Color3.fromRGB(255, 255, 255)
+BtnVN.TextSize = 16
+BtnVN.Font = Enum.Font.SourceSansBold
+BtnVN.Parent = MainFrame
+
+local BtnVNCorner = Instance.new("UICorner")
+BtnVNCorner.CornerRadius = UDim.new(0, 8)
+BtnVNCorner.Parent = BtnVN
+
+local BtnEN = Instance.new("TextButton")
+BtnEN.Size = UDim2.new(0, 130, 0, 45)
+BtnEN.Position = UDim2.new(1, -150, 0, 95)
+BtnEN.BackgroundColor3 = Color3.fromRGB(40, 120, 220)
+BtnEN.Text = "English 🇬🇧"
+BtnEN.TextColor3 = Color3.fromRGB(255, 255, 255)
+BtnEN.TextSize = 16
+BtnEN.Font = Enum.Font.SourceSansBold
+BtnEN.Parent = MainFrame
+
+local BtnENCorner = Instance.new("UICorner")
+BtnENCorner.CornerRadius = UDim.new(0, 8)
+BtnENCorner.Parent = BtnEN
+
+-- ====================================================================
+-- TẢI SCRIPT TIẾNG ANH (GỐC)
+-- ====================================================================
+local function loadEnglish()
+    LangGui:Destroy()
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/359e97f8618e9008afe5f496184ebb7c.lua"))()
+end
+
+-- ====================================================================
+-- TẢI SCRIPT TIẾNG VIỆT
+-- ====================================================================
+local function loadVietnamese()
+    LangGui:Destroy()
+    
+    -- Từ điển dịch thuật
+    local Translations = {
+       ["Auto Steel Eggs"] = "Tự Động Trộm Trứng",
+    ["Eggs"] = "Trứng",
+    ["Progression"] = "Tiến Trình",
+    ["Pets"] = "Thú Cưng",
+    ["Events"] = "Sự Kiện",
+    ["Contest"] = "Cuộc Thi",
+    ["Fuse"] = "Dung Hợp",
+    ["Visual"] = "Giao Diện & ESP",
+    ["Settings"] = "Cài Đặt",
+
+    -- [ TAB AUTO STEEL EGGS ]
+    ["Auto Capture Egg"] = "Tự Động Bắt Trứng",
+    ["Capture Range (studs)"] = "Tầm Bắt Trứng (studs)",
+    ["Captain Egg"] = "Trứng Đội Trưởng",
+    ["Avoid Baps"] = "Tránh Bẫy Baps",
+    ["Avoid Traps"] = "Tránh Bẫy",
+    ["Rarity"] = "Độ Hiếm",
+    ["Return to Plot"] = "Trở Về Khu Đất",
+    ["Plot Spawn"] = "Vị Trí Xuất Hiện Tại Đất",
+    ["Return to Last Position"] = "Trở Lại Vị Trí Cũ",
+    ["Anti AFK"] = "Chống Văng AFK",
+    ["Auto Execute"] = "Tự Chạy Script Khi Vào Game",
+    ["Auto Reconnect"] = "Tự Kết Nối Lại",
+    ["OP Stuffs"] = "Tính Năng Nâng Cao (OP)",
+    ["God Mode"] = "Chế Độ Bất Tử",
+    ["Instant Steal"] = "Trộm Tức Thì",
+    ["Glide Speed"] = "Tốc Độ Bay / Trượt",
+    ["Anti Treadmill"] = "Chống Đẩy Lùi Máy Chạy",
+    ["Auto Steal Filter"] = "Bộ Lọc Tự Trộm Trứng",
+    ["Cherry Blossom"] = "Hoa Anh Đào",
+    ["Cosmic"] = "Vũ Trụ",
+    ["Dark Light"] = "Ánh Sáng Tối",
+    ["Titan Temple"] = "Đền Titan",
+    ["Eternal"] = "Vĩnh Hằng",
+    ["Divine"] = "Thần Thánh",
+    ["Secret"] = "Bí Mật",
+    ["Mutations"] = "Đột Biến",
+    ["Match ALL Selected Mutations"] = "Khớp Tất Cả Đột Biến Chọn",
+    ["Only Mutated Eggs"] = "Chỉ Lấy Trứng Đột Biến",
+    ["Min KG"] = "Số KG Tối Thiểu",
+    ["Big KG"] = "Trứng KG Lớn",
+    ["Always Steal Dragon Eggs"] = "Luôn Trộm Trứng Rồng",
+    ["Skip Contested Eggs"] = "Bỏ Qua Trứng Tranh Chấp",
+
+    -- [ TAB EGGS ]
+    ["Egg Automation"] = "Tự Động Hóa Trứng",
+    ["Auto Place Selected"] = "Tự Đặt Trứng Đã Chọn",
+    ["Auto Place All"] = "Tự Đặt Tất Cả Trứng",
+    ["Auto Hatch Ready"] = "Tự Ấp Trứng Đã Sẵn Sàng",
+    ["Use Filter for Auto Hatch Ready"] = "Dùng Bộ Lọc Khi Ấp Trứng",
+    ["Hatch"] = "Ấp Trứng",
+    ["Place Thresholds"] = "Ngưỡng Đặt Trứng",
+    ["Place Only Above KG"] = "Chỉ Đặt Trứng Trên KG",
+    ["Place Only Below KG"] = "Chỉ Đặt Trứng Dưới KG",
+    ["Ignore these."] = "Bỏ Qua Mục Này.",
+    ["Auto Sell Eggs"] = "Tự Động Bán Trứng",
+    ["Auto Sell Selected"] = "Tự Bán Trứng Đã Chọn",
+    ["Sell Eggs Below KG"] = "Bán Trứng Dưới KG",
+
+    -- [ TAB PROGRESSION ]
+    ["Upgrades"] = "Nâng Cấp",
+    ["Auto Upgrade Pen"] = "Tự Nâng Cấp Chuồng",
+    ["Auto Treadmill Training"] = "Tự Tập Máy Chạy Bộ",
+    ["Auto Admin Treadmill"] = "Tự Tập Máy Chạy Admin",
+    ["Auto Treadmill Upgrade"] = "Tự Nâng Cấp Máy Chạy Bộ",
+    ["Trails To Buy"] = "Vệt Di Chuyển Cần Mua",
+    ["Auto Buy Selected Trails"] = "Tự Mua Vệt Đã Chọn",
+    ["Auto Buy All Cash Trails"] = "Tự Mua Tất Cả Vệt Bằng Tiền",
+    ["Auto Equip Best Trail"] = "Tự Đeo Vệt Tốt Nhất",
+    ["Gear & Rewards"] = "Trang Bị & Phần Thưởng",
+    ["Auto Equip Best Gear"] = "Tự Đeo Đồ Tốt Nhất",
+    ["Auto Claim Index Rewards"] = "Tự Nhận Thưởng Index",
+    ["Auto Claim Group Reward"] = "Tự Nhận Thưởng Nhóm",
+
+    -- [ TAB PETS ]
+    ["Claim Offline Earnings"] = "Nhận Thu Nhập Offline",
+    ["Auto Sell Pets"] = "Tự Động Bán Thú Cưng",
+    ["Auto Sell Selected"] = "Tự Bán Pet Đã Chọn",
+    ["Auto Sell All Eligible"] = "Tự Bán Tất Cả Pet Đủ Điều Kiện",
+    ["Auto Unequip for Selling"] = "Tự Tháo Pet Để Bán",
+    ["Keep Best (never sell)"] = "Giữ Lại Pet Tốt Nhất",
+    ["Sell Delay (per seat)"] = "Thời Gian Trễ Khi Bán",
+
+    -- [ TAB EVENTS ]
+    ["Enchanted"] = "Mê Hoặc",
+    ["Scramble"] = "Tranh giành",
+    ["Wisp"] = "Linh Hồn Wisp",
+    ["Auto Wisp Quests"] = "Tự Làm Nhiệm Vụ Wisp",
+    ["Steal Wisp Eggs"] = "Trộm Trứng Wisp",
+    ["Butterflies"] = "Bướm",
+    ["Auto Catch Butterflies"] = "Tự Động Bắt Bướm",
+    ["Auto Essence"] = "Tự Động Thu Tinh Chất",
+    ["Auto Trade Up"] = "Tự Đổi / Nâng Cấp Tinh Chất",
+    ["Banjo Cricket"] = "Dế Banjo",
+    ["Auto Banjo Cricket"] = "Tự Động Sự Kiện Dế Banjo",
+    ["Dr. Scramble"] = "Tiến Sĩ Scramble",
+    ["Auto Collect"] = "Tự Động Gom Nhặt",
+    ["Rarest Drones First"] = "Ưu Tiên Drone Hiếm Nhất",
+    ["Auto Quest"] = "Tự Động Làm Nhiệm Vụ",
+    ["Dr. Scramble Boss"] = "Boss Tiến Sĩ Scramble",
+    ["Auto Fight Boss"] = "Tự Đánh Boss",
+    ["Auto Claim Mastery"] = "Tự Nhận Điểm Thông Thạo",
+    ["Auto Steel Recipe Eggs"] = "Tự Trộm Trứng Công Thức",
+    ["Stock Up Isperes"] = "Tích Trữ Isperes",
+    ["Mutation Shards"] = "Mảnh Đột Biến",
+    ["Auto Mutation Shards"] = "Tự Thu Mảnh Đột Biến",
+
+    -- [ TAB CONTEST ]
+    ["Contest Players"] = "Người Chơi Trong Cuộc Thi",
+    ["Bat Aura"] = "Hào Quang Đánh Gậy Tự Động",
+    ["Auto Equip Best Bat"] = "Tự Đeo Gậy Mạnh Nhất",
+    ["Forward Offset (studs)"] = "Khoảng Bù Phía Trước",
+    ["Give Up After (seconds)"] = "Bỏ Cuộc Sau (giây)",
+
+    -- [ TAB FUSE ]
+    ["Fuse Predictor"] = "Dự Đoán Kết Quả Dung Hợp",
+    ["Auto Fuse Selected"] = "Tự Dung Hợp Pet Đã Chọn",
+    ["Auto Fuse All Eligible"] = "Tự Dung Hợp Pet Đủ Điều Kiện",
+    ["Only Fuse Pets Below 5/6"] = "Chỉ Dung Hợp Pet Dưới 5/6",
+    ["Shrine Fusion"] = "Dung Hợp Đền Thờ",
+    ["Auto Shrine Fusion"] = "Tự Dung Hợp Đền Thờ",
+
+    -- [ TAB VISUAL ]
+    ["Performance"] = "Hiệu Năng",
+    ["Ultra RPG Boost"] = "Tối Ưu Hóa FPS Cực Cao",
+    ["Delete Pets (FPS BOOST)"] = "Ẩn/Xóa Pet (Tăng FPS)",
+    ["Inventory Value"] = "Giá Trị Kho Đồ",
+    ["Inventory Value ESP"] = "Hiện Giá Trị Kho Đồ",
+    ["Egg ESP"] = "Hiện Vị Trí Trứng",
+    ["Egg ESP Filter"] = "Bộ Lọc Hiện Trứng",
+    ["Max Distance (studs)"] = "Khoảng Cách Tối Đa",
+
+    -- [ TAB SETTINGS ]
+    ["Configs"] = "Cấu Hình",
+    ["Create"] = "Tạo Mới",
+    ["Save"] = "Lưu",
+    ["Delete"] = "Xóa",
+    ["Clear auto-load"] = "Xóa Tự Tải Cấu Hình",
+    ["Autoload mode"] = "Chế Độ Tự Tải",
+    ["Autosave loaded config"] = "Tự Lưu Cấu Hình Đang Dùng",
+    ["Copy code"] = "Sao Chép Mã",
+    ["Import code"] = "Nhập Mã",
+    ["Toggle menu"] = "Bật/Tắt Menu",
+    ["Auto Hide UI after execute"] = "Tự Ẩn UI Sau Khi Chạy",
+    ["Watermark"] = "Logo Chìm",
+    ["Mobile toggle button"] = "Nút Bật/Tắt Trên Mobile",
+    ["Dim background"] = "Làm Tối Nền",
+    ["Weather"] = "Thời Tiết",
+    ["Weather area"] = "Khu Vực Thời Tiết",
+    ["Inside UI"] = "Bên Trong UI",
+    ["Weather size"] = "Kích Thước Thời Tiết",
+    ["Draggable cards"] = "Thẻ Kéo Di Chuyển",
+    ["Collapse sidebar"] = "Thu Gọn Thanh Bên",
+    ["Reset card layout"] = "Đặt Lại Bố Cục Thẻ",
+    ["Auto scale to screen"] = "Tự Tỷ Lệ Màn Hình",
+    ["Font"] = "Phông Chữ",
+    ["Unload"] = "Tắt Script",
+    ["Theme"] = "Giao Diện"
+    }
+
+    local function translateText(originalText)
+        if not originalText or originalText == "" then return originalText end
+        if Translations[originalText] then return Translations[originalText] end
+        local translated = originalText
+        for eng, vie in pairs(Translations) do
+            if string.find(translated, eng, 1, true) then
+                translated = string.gsub(translated, eng, vie)
+            end
+        end
+        return translated
+    end
+
+    local function applyTranslation(inst)
+        if inst:IsA("TextLabel") or inst:IsA("TextButton") or inst:IsA("TextBox") then
+            local currentText = inst.Text
+            local newText = translateText(currentText)
+            if newText ~= currentText then inst.Text = newText end
+            inst:GetPropertyChangedSignal("Text"):Connect(function()
+                local textNow = inst.Text
+                local translatedNow = translateText(textNow)
+                if translatedNow ~= textNow then inst.Text = translatedNow end
+            end)
+        end
+    end
+
+    -- Chạy hook dịch tự động
+    for _, child in ipairs(CoreGui:GetDescendants()) do applyTranslation(child) end
+    if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") then
+        for _, child in ipairs(LocalPlayer.PlayerGui:GetDescendants()) do applyTranslation(child) end
+    end
+    CoreGui.DescendantAdded:Connect(applyTranslation)
+    if LocalPlayer and LocalPlayer:FindFirstChild("PlayerGui") then
+        LocalPlayer.PlayerGui.DescendantAdded:Connect(applyTranslation)
+    end
+
+    -- Tải script BigFroot
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/hanniii1/Loader/refs/heads/main/BFLoader.lua"))()
+end
+
+-- Bắt sự kiện bấm nút
+BtnVN.MouseButton1Click:Connect(loadVietnamese)
+BtnEN.MouseButton1Click:Connect(loadEnglish)
